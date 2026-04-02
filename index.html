@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جامعة القرآن الكريم - الصفحة الرئيسية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            direction: rtl;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c2c 0%, #2a5a3a 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ministry-logo {
+            text-align: center;
+        }
+
+        .ministry-logo div {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ministry-logo span {
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .university-name h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .university-name p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: 2px solid white;
+            border-radius: 30px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: white;
+            color: #2a5a3a;
+        }
+
+        .btn-primary {
+            background: #f39c12;
+            border-color: #f39c12;
+        }
+
+        .btn-primary:hover {
+            background: #e67e22;
+            border-color: #e67e22;
+            color: white;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #2a5a3a;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .btn-large {
+            padding: 15px 40px;
+            font-size: 18px;
+            background: #f39c12;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .hero .btn-large:hover {
+            transform: scale(1.05);
+            background: #e67e22;
+        }
+
+        .news-section {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: #2a5a3a;
+            margin-bottom: 40px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: #f9f9f9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-content h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .news-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background: #1e3c2c;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-area">
+                    <div class="ministry-logo">
+                        <div>
+                            <span style="font-size: 35px;">📚</span>
+                        </div>
+                        <span>وزارة التربية والتعليم</span>
+                    </div>
+                    <div class="university-name">
+                        <h1>جامعة القرآن الكريم</h1>
+                        <p>بالتعاون مع وزارة التربية والتعليم</p>
+                    </div>
+                </div>
+                <div class="header-buttons">
+                    <a href="#" class="btn" onclick="redirectToLogin(event)">تسجيل الدخول</a>
+                    <a href="#" class="btn btn-primary" onclick="redirectToLogin(event)">التسجيل</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="#" onclick="redirectToLogin(event)">الرئيسية</a></li>
+                <li><a href="#" onclick="redirectToLogin(event)">عن الجامعة</a></li>
+                <li><a href="#" onclick="redirectToLogin(event)">الكليات</a></li>
+                <li><a href="#" onclick="redirectToLogin(event)">التسجيل الإلكتروني</a></li>
+                <li><a href="#" onclick="redirectToLogin(event)">المناهج</a></li>
+                <li><a href="#" onclick="redirectToLogin(event)">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="container">
+            <h1>مرحباً بكم في جامعة القرآن الكريم</h1>
+            <p>نحو جيل يقرأ القرآن الكريم ويتدبره ويعمل به، بالشراكة مع وزارة التربية والتعليم</p>
+            <button class="btn-large" onclick="redirectToLogin(event)">📖 نظام تسليم المشاريع</button>
+        </div>
+    </div>
+
+    <div class="news-section">
+        <div class="container">
+            <h2 class="section-title">آخر الأخبار</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">📢</div>
+                    <div class="news-content">
+                        <h3>بدء التسجيل للعام الجامعي الجديد</h3>
+                        <p>تعلن جامعة القرآن الكريم عن بدء التسجيل للعام الجامعي 2024-2025 عبر نظام التسجيل الإلكتروني.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">🏆</div>
+                    <div class="news-content">
+                        <h3>مسابقة حفظ القرآن الكريم</h3>
+                        <p>تنظم الجامعة مسابقة لحفظ القرآن الكريم للطلاب، للتسجيل اضغط هنا.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">📅</div>
+                    <div class="news-content">
+                        <h3>مواعيد تسليم المشاريع</h3>
+                        <p>يُذكر الطلاب بأن موعد تسليم مشاريع التخرج هو بعد يومين من الآن.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>جميع الحقوق محفوظة © 2024 جامعة القرآن الكريم - بالتعاون مع وزارة التربية والتعليم</p>
+        </div>
+    </div>
+
+    <script>
+        function redirectToLogin(event) {
+            event.preventDefault();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
