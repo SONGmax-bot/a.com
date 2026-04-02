@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع التخرج - جامعة القرآن الكريم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c2c 0%, #2a5a3a 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            color: #2a5a3a;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .student-info {
+            background: #f0f4f0;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .student-info h3 {
+            color: #2a5a3a;
+            margin-bottom: 10px;
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .file-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .file-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .file-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .file-card p {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #2a5a3a 0%, #1e3c2c 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(42, 90, 58, 0.4);
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            color: #856404;
+            font-size: 13px;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            margin-top: 20px;
+            padding: 12px 30px;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📘 مشروع التخرج</h1>
+            <p>مرحباً بك في نظام تسليم المشاريع</p>
+        </div>
+
+        <div class="student-info">
+            <h3>👩‍🎓 الطالبة: ليلى محمد</h3>
+            <p>قسم التفسير والحديث - جامعة القرآن الكريم</p>
+            <p>📅 تاريخ التسليم: بعد يومين</p>
+        </div>
+
+        <div class="files-grid">
+            <!-- ملف 1 -->
+            <div class="file-card">
+                <div class="file-icon">📄</div>
+                <h3>مشروع_التخرج_ليلى.docx</h3>
+                <p>الحجم: 2.4 MB | تاريخ التعديل: 2024-12-20</p>
+                <button class="download-btn" onclick="window.location.href='Ab.html'">📥 تحميل الملف</button>
+            </div>
+
+            <!-- ملف 2 -->
+            <div class="file-card">
+                <div class="file-icon">📊</div>
+                <h3>البحث_الميداني.xlsx</h3>
+                <p>الحجم: 1.8 MB | تاريخ التعديل: 2024-12-19</p>
+                <button class="download-btn" onclick="window.location.href='Ab.html'">📥 تحميل الملف</button>
+            </div>
+
+            <!-- ملف 3 -->
+            <div class="file-card">
+                <div class="file-icon">🎥</div>
+                <h3>عرض_المشروع.pptx</h3>
+                <p>الحجم: 5.2 MB | تاريخ التعديل: 2024-12-18</p>
+                <button class="download-btn" onclick="window.location.href='Ab.html'">📥 تحميل الملف</button>
+            </div>
+
+            <!-- ملف 4 -->
+            <div class="file-card">
+                <div class="file-icon">📑</div>
+                <h3>المراجع_والمصادر.pdf</h3>
+                <p>الحجم: 1.2 MB | تاريخ التعديل: 2024-12-17</p>
+                <button class="download-btn" onclick="window.location.href='Ab.html'">📥 تحميل الملف</button>
+            </div>
+
+            <!-- ملف 5 -->
+            <div class="file-card">
+                <div class="file-icon">🗂️</div>
+                <h3>الملفات_الكاملة.zip</h3>
+                <p>الحجم: 12.5 MB | تاريخ التعديل: 2024-12-20</p>
+                <button class="download-btn" onclick="window.location.href='Ab.html'">📥 تحميل الكل</button>
+            </div>
+        
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="login.html" class="logout-btn">🚪 تسجيل خروج</a>
+        </div>
+    </div>
+</body>
+</html>

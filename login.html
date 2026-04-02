@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تسليم المشاريع - جامعة القرآن الكريم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            direction: rtl;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 420px;
+            padding: 50px 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .logo p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>📚 جامعة القرآن الكريم</h1>
+            <p>نظام تسليم مشاريع التخرج</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label>📧 البريد الإلكتروني</label>
+                <input type="email" id="email" placeholder="student@university.edu">
+            </div>
+            <div class="input-group">
+                <label>🔒 كلمة المرور</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+            <button type="submit">🚪 تسجيل الدخول</button>
+            <div class="error-msg" id="errorMsg">❌ البريد الإلكتروني أو كلمة المرور غير صحيحة</div>
+        </form>
+    </div>
+
+    <script>
+        // البيانات المحددة مسبقاً
+        const VALID_EMAIL = "max2006@gmail.com";
+        const VALID_PASSWORD = "kali26";
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            
+            // التحقق من صحة البيانات
+            if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+                // تخزين محاكاة للبيانات (للتوعية فقط)
+                console.log('✅ تم تسجيل الدخول بنجاح');
+                console.log('📧 البريد: ' + email);
+                console.log('🔑 كلمة المرور: ' + password);
+                
+                // التحويل إلى صفحة المشروع
+                window.location.href = 'project.html';
+            } else {
+                // إظهار رسالة خطأ
+                document.getElementById('errorMsg').style.display = 'block';
+                console.log('❌ محاولة دخول فاشلة: ' + email + ' / ' + password);
+            }
+        });
+    </script>
+</body>
+</html>
