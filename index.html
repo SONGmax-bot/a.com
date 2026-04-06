@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>العطاء الدائم | توزيع المساعدات - قروش، بطاطين، طاقة شمسية مجاناً</title>
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Arabic + Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(145deg, #fef9e6 0%, #fff4e0 100%);
+            color: #2c2b28;
+            line-height: 1.5;
+        }
+
+        /* شريط التقدم العلوي (لمحاكاة التوزيع الحي) */
+        .progress-bar-container {
+            background: #d9b48b;
+            width: 100%;
+            height: 6px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2000;
+        }
+        .progress-fill {
+            background: #c17b3c;
+            width: 0%;
+            height: 100%;
+            transition: width 0.2s ease;
+        }
+
+        /* container رئيسي */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* header */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 1.2rem;
+        }
+        .hero h1 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #b45f2b, #e2a36b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #5e3a1f;
+            background: #fff2e0d9;
+            display: inline-block;
+            padding: 0.4rem 1.8rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+            font-weight: 500;
+        }
+        .badge-international {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: #2b5e3b;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .badge i {
+            font-size: 1rem;
+        }
+
+        /* بطاقات المساعدات الرئيسية */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .card {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            backdrop-filter: blur(2px);
+            border: 1px solid #ffe3c6;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 40px -14px rgba(0,0,0,0.2);
+        }
+        .card-icon {
+            background: #fbe9cf;
+            padding: 1.8rem;
+            text-align: center;
+            font-size: 3.5rem;
+            color: #c17b3c;
+        }
+        .card-content {
+            padding: 1.5rem 1.5rem 1.8rem;
+            text-align: center;
+        }
+        .card-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #3e2a1b;
+        }
+        .card-content .amount {
+            font-size: 1rem;
+            font-weight: 600;
+            background: #e9ddce;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            margin: 0.7rem 0;
+            color: #8b5a2e;
+        }
+        .card-content p {
+            color: #4f3e2c;
+            margin: 0.8rem 0;
+        }
+        .btn-redirect {
+            background: #b45f2b;
+            border: none;
+            color: white;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.8rem;
+            width: 80%;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-redirect:hover {
+            background: #9b4a1b;
+            transform: scale(0.97);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* قسم إحصائيات التوزيع */
+        .stats-section {
+            background: #ffffffcc;
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #ffe0bd;
+        }
+        .stats-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #7b4a23;
+        }
+        .stats-flex {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            text-align: center;
+        }
+        .stat-item {
+            flex: 1;
+            background: #fdf6ed;
+            border-radius: 1.5rem;
+            padding: 1rem;
+        }
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #c47a44;
+            line-height: 1;
+        }
+        .stat-label {
+            font-weight: 600;
+            color: #5a3f27;
+        }
+
+        /* رسالة تنبيه عند النقر على الزر */
+        .toast-msg {
+            visibility: hidden;
+            min-width: 260px;
+            background-color: #2b6e42;
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            padding: 12px 20px;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            z-index: 3000;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transition: visibility 0s, opacity 0.3s;
+            opacity: 0;
+        }
+        .toast-msg.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            border-top: 1px solid #f0dbbc;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            color: #886e4a;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.9rem; }
+            .container { padding: 1rem; }
+            .card-content h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="progress-bar-container">
+    <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-hand-holding-heart"></i> العطاء الدائم</h1>
+        <p>برنامج الهجرة الدولية للتضامن الإنساني | توزيع مجاني بالكامل</p>
+        <div class="badge-international">
+            <span class="badge"><i class="fas fa-globe-asia"></i> شركاء دوليون</span>
+            <span class="badge"><i class="fas fa-solar-panel"></i> طاقة شمسية مستدامة</span>
+            <span class="badge"><i class="fas fa-wool"></i> بطاطين شتوية</span>
+            <span class="badge"><i class="fas fa-coins"></i> قروش نقدية</span>
+        </div>
+    </div>
+
+    <!-- بطاقات المساعدات الرئيسية -->
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-coins"></i></div>
+            <div class="card-content">
+                <h3>قروش نقدية</h3>
+                <div class="amount">قيمة رمزية 250,000₵</div>
+                <p>دعم مالي مباشر للأسر المستحقة، بدون فوائد أو التزامات، ضمن منحة الهجرة الإنسانية.</p>
+                <a href="1.html" class="btn-redirect" data-aid="cash">التقديم الآن <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-blanket"></i></div>
+            <div class="card-content">
+                <h3>بطاطين شتوية</h3>
+                <div class="amount">4 بطاطين ثقيلة لكل أسرة</div>
+                <p>بطاطين عالية الجودة مقاومة للبرد، تم توزيع آلاف منها في مناطق الاجتياح والمخيمات.</p>
+                <a href="1.html" class="btn-redirect" data-aid="blanket">طلب بطاطين مجانية <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-solar-panel"></i></div>
+            <div class="card-content">
+                <h3>طاقة شمسية</h3>
+                <div class="amount">نظام شمسي متكامل</div>
+                <p>ألواح شمسية + بطاريات + لمبات LED، لتوفير كهرباء نظيفة للأسر النازحة والمحتاجة.</p>
+                <a href="1.html" class="btn-redirect" data-aid="solar">استلام نظام شمسي <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- إحصائيات حية لتوزيع المساعدات -->
+    <div class="stats-section">
+        <div class="stats-title"><i class="fas fa-chart-line"></i> مؤشرات التوزيع الميداني</div>
+        <div class="stats-flex">
+            <div class="stat-item">
+                <div class="stat-number" id="statCash">1,240</div>
+                <div class="stat-label">أسرة استلمت قروش</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statBlanket">3,870</div>
+                <div class="stat-label">بطانية موزعة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statSolar">612</div>
+                <div class="stat-label">نظام شمسي منصّب</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statCountries">28+</div>
+                <div class="stat-label">دولة مستفيدة</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-hand-peace"></i> برنامج التوزيع التابع لمنظمة "هجرة دولية إنسانية" | جميع المساعدات مجانية بالكامل |
+        تم توزيع آلاف القروش والبطانيات والأنظمة الشمسية حول العالم.
+    </footer>
+</div>
+
+<div id="toastMsg" class="toast-msg">✨ جارٍ التحويل إلى صفحة التسجيل المتكاملة...</div>
+
+<script>
+    // --- إحصائيات ديناميكية (محاكاة واقعية) ---
+    let cashCount = 1240;
+    let blanketCount = 3870;
+    let solarCount = 612;
+
+    function updateStatsUI() {
+        document.getElementById('statCash').innerText = cashCount.toLocaleString();
+        document.getElementById('statBlanket').innerText = blanketCount.toLocaleString();
+        document.getElementById('statSolar').innerText = solarCount.toLocaleString();
+    }
+
+    // عرض رسالة مؤقتة ثم الانتقال إلى 1.html
+    function showToastAndRedirect(event, targetUrl) {
+        event.preventDefault(); // نمنع الانتقال الفوري لنعرض رسالة ثم ننتقل
+        const toast = document.getElementById('toastMsg');
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+            // بعد الرسالة ننتقل إلى الصفحة المطلوبة
+            window.location.href = targetUrl;
+        }, 900);
+    }
+
+    // إضافة حدث لجميع الأزرار التي تحمل class "btn-redirect"
+    const redirectBtns = document.querySelectorAll('.btn-redirect');
+    redirectBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href) {
+                showToastAndRedirect(e, href);
+            }
+        });
+    });
+
+    // محاكاة زيادة بسيطة في الإحصائيات بشكل دوري (لإضفاء الحيوية)
+    function simulateRandomDistribution() {
+        // كل 20 ثانية تزيد أرقام بسيطة تعطي انطباع باستمرار التوزيع
+        setInterval(() => {
+            cashCount += Math.floor(Math.random() * 2);
+            blanketCount += Math.floor(Math.random() * 5);
+            solarCount += Math.floor(Math.random() * 1);
+            updateStatsUI();
+            // تحريك شريط التقدم
+            let currentWidth = parseFloat(document.getElementById('progressFill').style.width) || 74;
+            if (currentWidth < 96) {
+                let newWidth = currentWidth + 0.2;
+                document.getElementById('progressFill').style.width = newWidth + '%';
+            } else {
+                document.getElementById('progressFill').style.width = '96.5%';
+            }
+        }, 20000);
+    }
+
+    window.addEventListener('load', () => {
+        document.getElementById('progressFill').style.width = '74%';
+        updateStatsUI();
+        simulateRandomDistribution();
+    });
+</script>
+</body>
+</html>
